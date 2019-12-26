@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 class JokeApp extends Component {
     constructor(props) {
         super(props);
-        this.state = {jokeItem: "nothhing"};
+        this.state = {
+            jokeItem: "nothhing",
+            upvotes: 0,
+            downvotes: 0,
+            id: ""
+        };
       }
 
     componentDidMount() {
@@ -22,15 +27,22 @@ class JokeApp extends Component {
             if (error) throw new Error(error);
 
             console.log(body)
+            let data = JSON.parse(body)
             this.setState ({
-                jokeItem: JSON.parse(body).content
+                jokeItem: data.content,
+                upvotes: data.upvotes,
+                downvotes: data.downvotes
             })
         });
     }
 
     render() {
         return (
-        <div>{ this.state.jokeItem }</div>
+        <div>
+            <div>{ this.state.jokeItem }</div>
+            <div>{ this.state.upvotes }</div>
+            <div>{ this.state.downvotes }</div>
+        </div>
         )
     }
 }
