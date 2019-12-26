@@ -18,7 +18,7 @@ class JokeApp extends Component {
             }
         };
 
-        request(options, function (error, response, body) {
+        request(options, (error, response, body) => {
             if (error) throw new Error(error);
 
             // this.state.jokeItem = body["content"]
@@ -27,10 +27,10 @@ class JokeApp extends Component {
             this.setState ({
                 jokeItem: JSON.parse(body).content
             })
-            this.state.jokeItem = (JSON.parse(body).content)
+            // this.state.jokeItem = (JSON.parse(body).content)
             console.log(JSON.parse(body).content)
             // console.log(body["content"])
-        }.bind(this));
+        });
     }
 
     render() {
