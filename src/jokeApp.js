@@ -9,9 +9,11 @@ class JokeApp extends Component {
             downvotes: 0,
             id: ""
         };
+
+        this.getJoke = this.getJoke.bind(this);
       }
 
-    componentDidMount() {
+      getJoke() {
         let request = require("request");
 
         let options = {
@@ -26,14 +28,18 @@ class JokeApp extends Component {
         request(options, (error, response, body) => {
             if (error) throw new Error(error);
 
-            console.log(body)
-            let data = JSON.parse(body)
+            console.log(body);
+            let data = JSON.parse(body);
             this.setState ({
                 jokeItem: data.content,
                 upvotes: data.upvotes,
                 downvotes: data.downvotes
-            })
+            });
         });
+      }
+
+    componentDidMount() {
+        this.getJoke();
     }
 
     render() {
@@ -42,6 +48,9 @@ class JokeApp extends Component {
             <div>{ this.state.jokeItem }</div>
             <div>{ this.state.upvotes }</div>
             <div>{ this.state.downvotes }</div>
+            <button onClick={this.getJoke}>
+                refresh
+            </button>
         </div>
         )
     }
