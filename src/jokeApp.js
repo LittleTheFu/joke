@@ -9,11 +9,9 @@ class JokeApp extends Component {
             downvotes: 0,
             id: ""
         };
-
-        this.getJoke = this.getJoke.bind(this);
       }
 
-      getJoke() {
+      getJoke = () => {
         let request = require("request");
 
         let options = {
