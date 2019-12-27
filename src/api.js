@@ -1,4 +1,4 @@
-const fetchJokeItem = () => {
+const rawFetchJokeItem = () => {
     return new Promise(function(resolve, reject) {
         let fetchData = {
             method: 'GET',
@@ -20,4 +20,4 @@ const fetchJokeItem = () => {
     });
 };
 
-export default fetchJokeItem;
+export default rawFetchJokeItem;

@@ -13,9 +13,9 @@ const initialState = {
              ...state,
              data: {
                 ...state.data,
-                jokeItem: action.joke.jokeItem,
-                upvotes: action.joke.upvotes,
-                downvotes: action.joke.downvotes,
+                jokeItem: action.data.content,
+                upvotes: action.data.upvotes,
+                downvotes: action.data.downvotes,
              },
           };
         default:

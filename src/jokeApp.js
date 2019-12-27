@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import fetchJokeItem from './api';
 import { connect } from 'react-redux';
-import { getFakeJoke } from './apiActions';
+import { fetchJokeItem } from './apiActions';
 
 const mapStateToProps = state => {
     return {
@@ -11,7 +10,7 @@ const mapStateToProps = state => {
 
  const mapDispatchToProps = dispatch => {
      return {
-         getJokeData: (jokeData) => dispatch(getFakeJoke(jokeData)),
+         getJokeFromNet: () => { dispatch(fetchJokeItem()) }
      }
  };
 
@@ -21,7 +20,6 @@ class JokeApp extends Component {
         super(props);
         const { apiState } = props;
 
-        console.log(apiState);
         this.state = {
             jokeItem: apiState.jokeItem,
             upvotes: apiState.upvotes,
@@ -38,33 +36,12 @@ class JokeApp extends Component {
         };
      }
 
-      getJokeFakeData = () => {
-        let fakeData = {
-            jokeItem: "fake joke",
-            upvotes: 3,
-            downvotes: 9,
-            id: ""
-        };
-
-        this.props.getJokeData(fakeData);
-      };
-
     getJoke = () => {
-        // fetchJokeItem()
-        // .then((data) => {
-        //     this.setState ({
-        //         jokeItem: data.content,
-        //         upvotes: data.upvotes,
-        //         downvotes: data.downvotes
-        //     });
-        // })
-        // .catch((err) => {
-        //     console.log(err)
-        // });
+        this.props.getJokeFromNet();
     }
 
     componentDidMount() {
-        // this.getJoke();
+        this.getJoke();
     }
 
     render() {
@@ -73,7 +50,7 @@ class JokeApp extends Component {
             <div>{ this.state.jokeItem }</div>
             <div>{ this.state.upvotes }</div>
             <div>{ this.state.downvotes }</div>
-            <button onClick={this.getJokeFakeData}>
+            <button onClick={this.getJoke}>
                 refresh
             </button>
         </div>
