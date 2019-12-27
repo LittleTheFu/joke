@@ -11,30 +11,30 @@ class JokeApp extends Component {
         };
       }
 
-      getJoke = () => {
-        let fetchData = {
-            method: 'GET',
-            headers: {
-                'x-rapidapi-host': 'joke3.p.rapidapi.com',
-                'x-rapidapi-key': 'fc5476beb4mshc57aa5e3ed24365p114d83jsn1e6a83699ef6'
-            
-        }};
+    getJoke = () => {
+    let fetchData = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-host': 'joke3.p.rapidapi.com',
+            'x-rapidapi-key': 'fc5476beb4mshc57aa5e3ed24365p114d83jsn1e6a83699ef6'
+        
+    }};
 
-        fetch('https://joke3.p.rapidapi.com/v1/joke', fetchData)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                this.setState ({
-                    jokeItem: data.content,
-                    upvotes: data.upvotes,
-                    downvotes: data.downvotes
-                });
-            })
-            .catch((err) => {
-                console.log(err);
+    fetch('https://joke3.p.rapidapi.com/v1/joke', fetchData)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            this.setState ({
+                jokeItem: data.content,
+                upvotes: data.upvotes,
+                downvotes: data.downvotes
             });
-      }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
 
     componentDidMount() {
         this.getJoke();
