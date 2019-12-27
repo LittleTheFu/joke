@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchJokeItem } from './apiActions';
+import thumbs_up from './thumbs_up.svg';
+import thumbs_down from './thumbs_down.svg';
+
 
 const mapStateToProps = state => {
     return {
@@ -47,9 +50,17 @@ class JokeApp extends Component {
     render() {
         return (
         <div>
-            <div>{ this.state.jokeItem }</div>
-            <div>{ this.state.upvotes }</div>
-            <div>{ this.state.downvotes }</div>
+            <div>
+                { this.state.jokeItem }
+            </div>
+            <div>
+                <img src={thumbs_up} />
+                { this.state.upvotes }
+            </div>
+            <div>
+                <img src={thumbs_down} />
+                { this.state.downvotes }
+            </div>
             <button onClick={this.getJoke}>
                 refresh
             </button>
