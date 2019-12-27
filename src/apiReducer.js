@@ -1,8 +1,8 @@
 const initialState = {
     data: {
-       jokeItem: "",
-       upvotes: 0,
-       downvotes: 0,
+       jokeItem: "default joke item",
+       upvotes: 10,
+       downvotes: 10,
     },
  };
 

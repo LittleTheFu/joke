@@ -1,33 +1,43 @@
 import React, { Component } from 'react';
 import fetchJokeItem from './api';
+import { connect } from 'react-redux';
+
+
+const mapStateToProps = state => {
+    return {
+        apiState: state.apiState,
+    };
+ };
 
 class JokeApp extends Component {
     constructor(props) {
         super(props);
+        const { apiState } = props;
+
         this.state = {
-            jokeItem: "nothhing",
-            upvotes: 0,
-            downvotes: 0,
+            jokeItem: apiState.data.jokeItem,
+            upvotes: apiState.data.upvotes,
+            downvotes: apiState.data.downvotes,
             id: ""
         };
       }
 
     getJoke = () => {
-        fetchJokeItem()
-        .then((data) => {
-            this.setState ({
-                jokeItem: data.content,
-                upvotes: data.upvotes,
-                downvotes: data.downvotes
-            });
-        })
-        .catch((err) => {
-            console.log(err)
-        });
+        // fetchJokeItem()
+        // .then((data) => {
+        //     this.setState ({
+        //         jokeItem: data.content,
+        //         upvotes: data.upvotes,
+        //         downvotes: data.downvotes
+        //     });
+        // })
+        // .catch((err) => {
+        //     console.log(err)
+        // });
     }
 
     componentDidMount() {
-        this.getJoke();
+        // this.getJoke();
     }
 
     render() {
@@ -44,4 +54,4 @@ class JokeApp extends Component {
     }
 }
 
-export default JokeApp;
+export default connect(mapStateToProps)(JokeApp);
