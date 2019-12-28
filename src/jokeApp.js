@@ -15,7 +15,6 @@ const JokeContainer = styled.h1`
 
 const Wrapper = styled.div`
     & path {
-        fill: red;
         &:hover {
             fill: blue;
         }
@@ -68,6 +67,10 @@ class JokeApp extends Component {
         console.log('vote down');
     }
 
+    refreshCkick = () => {
+        console.log('refresh this joke');
+    }
+
     componentDidMount() {
         this.getJoke();
     }
@@ -93,7 +96,10 @@ class JokeApp extends Component {
                 { this.state.downvotes }
             </div>
             <button onClick={this.getJoke}>
-                refresh
+                get random joke
+            </button>
+            <button onClick={this.refreshCkick}>
+                refresh this joke
             </button>
         </div>
         )
