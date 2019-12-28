@@ -60,6 +60,14 @@ class JokeApp extends Component {
         this.props.getJokeFromNet();
     }
 
+    thumbUpClick = () => {
+        console.log('vote up');
+    }
+
+    thumbDownClick = () => {
+        console.log('vote down');
+    }
+
     componentDidMount() {
         this.getJoke();
     }
@@ -74,13 +82,13 @@ class JokeApp extends Component {
             </div>
             <div>
                 <Wrapper>
-                    <ThumbsUp/>
+                    <ThumbsUp onClick={this.thumbUpClick}/>
                 </Wrapper>
                 { this.state.upvotes }
             </div>
             <div>
                 <Wrapper>
-                    <ThumbsDown/>
+                    <ThumbsDown onClick={this.thumbDownClick}/>
                 </Wrapper>
                 { this.state.downvotes }
             </div>
