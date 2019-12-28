@@ -3,6 +3,23 @@ import { connect } from 'react-redux';
 import { fetchJokeItem } from './apiActions';
 import thumbs_up from './thumbs_up.svg';
 import thumbs_down from './thumbs_down.svg';
+import styled from 'styled-components';
+
+const JokeContainer = styled.h1`
+    font-size: 1.5em;
+    text-align: center;
+    color: red;
+`;
+
+const Svg = styled.img`
+   height: 32px;
+   width: 32px;
+   margin: 0 8px;
+
+   &:hover {
+    box-shadow: 2px 2px;
+   }
+`;
 
 
 const mapStateToProps = state => {
@@ -51,14 +68,17 @@ class JokeApp extends Component {
         return (
         <div>
             <div>
-                { this.state.jokeItem }
+                <JokeContainer>
+                    { this.state.jokeItem }
+                </JokeContainer>
             </div>
+            <div>{thumbs_up}</div>
             <div>
-                <img src={thumbs_up} />
+                <Svg src={thumbs_up}></Svg>
                 { this.state.upvotes }
             </div>
             <div>
-                <img src={thumbs_down} />
+                <Svg src={thumbs_down}></Svg>
                 { this.state.downvotes }
             </div>
             <button onClick={this.getJoke}>
