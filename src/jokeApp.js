@@ -29,7 +29,7 @@ const mapStateToProps = state => {
 
  const mapDispatchToProps = dispatch => {
      return {
-         getJokeFromNet: () => { dispatch(fetchJokeItem()) }
+         getJokeFrRanddomomNet: () => { dispatch(fetchJokeItem()) }
      }
  };
 
@@ -56,7 +56,7 @@ class JokeApp extends Component {
      }
 
     getJoke = () => {
-        this.props.getJokeFromNet();
+        this.props.getJokeFrRanddomomNet();
     }
 
     thumbUpClick = () => {
