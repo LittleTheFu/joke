@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchRandomJokeItem } from './apiActions';
+import { fetchJokeItem } from './apiActions';
 import styled from 'styled-components';
 import { ReactComponent as ThumbsUp } from './thumbs_up.svg';
 import { ReactComponent as ThumbsDown } from './thumbs_down.svg';
@@ -27,8 +27,8 @@ const mapStateToProps = state => {
 
  const mapDispatchToProps = dispatch => {
      return {
-         getJokeFrRanddomomNet: () => { dispatch(fetchRandomJokeItem()) },
-         getJokeById: (id) => { dispatch(fetchRandomJokeItem(id)) },
+         getRandomJokeFromNet: () => { dispatch(fetchJokeItem()) },
+         getJokeById: (id) => { dispatch(fetchJokeItem(id)) },
      }
  };
 
@@ -56,7 +56,7 @@ class JokeApp extends Component {
      }
 
     getJoke = () => {
-        this.props.getJokeFrRanddomomNet();
+        this.props.getRandomJokeFromNet();
     }
 
     thumbUpClick = () => {
