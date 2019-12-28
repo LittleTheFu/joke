@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchJokeItem } from './apiActions';
-import thumbs_up from './thumbs_up.svg';
-import thumbs_down from './thumbs_down.svg';
 import styled from 'styled-components';
+import { ReactComponent as ThumbsUp } from './thumbs_up.svg';
+import { ReactComponent as ThumbsDown } from './thumbs_down.svg';
+
+
 
 const JokeContainer = styled.h1`
     font-size: 1.5em;
@@ -11,16 +13,14 @@ const JokeContainer = styled.h1`
     color: red;
 `;
 
-const Svg = styled.img`
-   height: 32px;
-   width: 32px;
-   margin: 0 8px;
-
-   &:hover {
-    box-shadow: 2px 2px;
-   }
+const Wrapper = styled.div`
+    & path {
+        fill: red;
+        &:hover {
+            fill: blue;
+        }
+    }
 `;
-
 
 const mapStateToProps = state => {
     return {
@@ -72,13 +72,16 @@ class JokeApp extends Component {
                     { this.state.jokeItem }
                 </JokeContainer>
             </div>
-            <div>{thumbs_up}</div>
             <div>
-                <Svg src={thumbs_up}></Svg>
+                <Wrapper>
+                    <ThumbsUp/>
+                </Wrapper>
                 { this.state.upvotes }
             </div>
             <div>
-                <Svg src={thumbs_down}></Svg>
+                <Wrapper>
+                    <ThumbsDown/>
+                </Wrapper>
                 { this.state.downvotes }
             </div>
             <button onClick={this.getJoke}>
