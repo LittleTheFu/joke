@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchJokeItem } from './apiActions';
+import { fetchRandomJokeItem } from './apiActions';
 import styled from 'styled-components';
 import { ReactComponent as ThumbsUp } from './thumbs_up.svg';
 import { ReactComponent as ThumbsDown } from './thumbs_down.svg';
-
-
 
 const JokeContainer = styled.h1`
     font-size: 1.5em;
@@ -29,7 +27,8 @@ const mapStateToProps = state => {
 
  const mapDispatchToProps = dispatch => {
      return {
-         getJokeFrRanddomomNet: () => { dispatch(fetchJokeItem()) }
+         getJokeFrRanddomomNet: () => { dispatch(fetchRandomJokeItem()) },
+         getJokeById: (id) => { dispatch(fetchRandomJokeItem(id)) },
      }
  };
 
@@ -43,7 +42,7 @@ class JokeApp extends Component {
             jokeItem: apiState.jokeItem,
             upvotes: apiState.upvotes,
             downvotes: apiState.downvotes,
-            id: ""
+            id: apiState.id,
         };
       }
 
@@ -52,6 +51,7 @@ class JokeApp extends Component {
             jokeItem: nextProps.apiState.jokeItem,
             upvotes: nextProps.apiState.upvotes,
             downvotes: nextProps.apiState.downvotes,
+            id: nextProps.apiState.id,
         };
      }
 
@@ -68,7 +68,7 @@ class JokeApp extends Component {
     }
 
     refreshCkick = () => {
-        console.log('refresh this joke');
+       this.props.getJokeById(this.state.id);
     }
 
     componentDidMount() {
@@ -82,6 +82,9 @@ class JokeApp extends Component {
                 <JokeContainer>
                     { this.state.jokeItem }
                 </JokeContainer>
+            </div>
+            <div>
+                { this.state.id }
             </div>
             <div>
                 <Wrapper>

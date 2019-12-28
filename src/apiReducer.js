@@ -3,6 +3,7 @@ const initialState = {
        jokeItem: "default joke item",
        upvotes: 10,
        downvotes: 10,
+       id: "",
     },
  };
 
@@ -16,6 +17,7 @@ const initialState = {
                 jokeItem: action.data.content,
                 upvotes: action.data.upvotes,
                 downvotes: action.data.downvotes,
+                id: action.data.id,
              },
           };
         default:
