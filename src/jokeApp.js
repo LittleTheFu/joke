@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchJokeItem } from './apiActions';
+import { fetchJokeItem, upvoteJokeItem, downvoteJokeItem } from './apiActions';
 import styled from 'styled-components';
 import { ReactComponent as ThumbsUp } from './thumbs_up.svg';
 import { ReactComponent as ThumbsDown } from './thumbs_down.svg';
@@ -29,6 +29,9 @@ const mapStateToProps = state => {
      return {
          getRandomJokeFromNet: () => { dispatch(fetchJokeItem()) },
          getJokeById: (id) => { dispatch(fetchJokeItem(id)) },
+         upvoteJokeItem: (id) => { dispatch(upvoteJokeItem(id)) },
+         downvoteJokeItem: (id) => { dispatch(downvoteJokeItem(id)) },
+
      }
  };
 
@@ -60,10 +63,12 @@ class JokeApp extends Component {
     }
 
     thumbUpClick = () => {
+        this.props.upvoteJokeItem(this.state.id);
         console.log('vote up');
     }
 
     thumbDownClick = () => {
+        this.props.downvoteJokeItem(this.state.id);
         console.log('vote down');
     }
 
@@ -78,6 +83,9 @@ class JokeApp extends Component {
     render() {
         return (
         <div>
+            <div>
+                777cb5f7fb804fb584f61a19a5daf49f
+            </div>
             <div>
                 <JokeContainer>
                     { this.state.jokeItem }
