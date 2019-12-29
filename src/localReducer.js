@@ -1,14 +1,16 @@
 const initialState = {
-    recentJokes:[],
+    recentJokes:[
+        { id: '0012', 
+        jokeItem: 'dummy joke'}
+    ],
  };
 
  const localReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_LOCAL_JOKE':
-            console.log('ADD_LOCAL_JOKE');
             return {
                 ...state,
-                recentJokes: [1,2,3,4,5],
+                recentJokes: [...state.recentJokes, action.joke],
             };
         default:
             return state;

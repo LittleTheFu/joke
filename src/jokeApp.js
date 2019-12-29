@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { ReactComponent as ThumbsUp } from './thumbs_up.svg';
 import { ReactComponent as ThumbsDown } from './thumbs_down.svg';
 import LoadingOverlay from 'react-loading-overlay';
+import JokeList from './jokeList';
 
 
 const JokeContainer = styled.h1`
@@ -26,6 +27,7 @@ const mapStateToProps = state => {
     return {
         apiState: state.apiState.data,
         uiState: state.uiState,
+        localState: state.localState,
     };
 };
 
@@ -35,7 +37,7 @@ const mapDispatchToProps = dispatch => {
         getJokeById: (id) => { dispatch(fetchJokeItem(id)) },
         upvoteJokeItem: (id) => { dispatch(upvoteJokeItem(id)) },
         downvoteJokeItem: (id) => { dispatch(downvoteJokeItem(id)) },
-        addLocalJoke: () => { dispatch(addLocalJoke()) },
+        addLocalJoke: (joke) => { dispatch(addLocalJoke(joke)) },
     }
 };
 
@@ -82,6 +84,15 @@ class JokeApp extends Component {
         this.props.getJokeById(this.state.id);
     }
 
+    addLocalJokeClick = () => {
+        // console.log(this.states.id);
+        let joke = { 
+            id: this.state.id,
+            jokeItem: this.state.jokeItem,
+         };
+        this.props.addLocalJoke(joke);
+    }
+
     componentDidMount() {
         this.getJoke();
     }
@@ -119,10 +130,12 @@ class JokeApp extends Component {
                 <button onClick={this.refreshCkick}>
                         refresh this joke
                 </button>
-                <button onClick={this.props.addLocalJoke}>
+                <button onClick={this.addLocalJokeClick}>
                         add local joke
                 </button>
                 </LoadingOverlay>
+
+                <JokeList items={this.props.localState.recentJokes}/>
             </div>
         )
     }

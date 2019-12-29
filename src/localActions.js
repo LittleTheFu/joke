@@ -1,1 +1,1 @@
-export const addLocalJoke = () => ({ type: 'ADD_LOCAL_JOKE' });
+export const addLocalJoke = (joke) => ({ type: 'ADD_LOCAL_JOKE', joke });
