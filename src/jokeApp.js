@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchJokeItem, upvoteJokeItem, downvoteJokeItem } from './apiActions';
+import { addLocalJoke } from './localActions';
 import styled from 'styled-components';
 import { ReactComponent as ThumbsUp } from './thumbs_up.svg';
 import { ReactComponent as ThumbsDown } from './thumbs_down.svg';
@@ -26,17 +27,17 @@ const mapStateToProps = state => {
         apiState: state.apiState.data,
         uiState: state.uiState,
     };
- };
+};
 
- const mapDispatchToProps = dispatch => {
-     return {
-         getRandomJokeFromNet: () => { dispatch(fetchJokeItem()) },
-         getJokeById: (id) => { dispatch(fetchJokeItem(id)) },
-         upvoteJokeItem: (id) => { dispatch(upvoteJokeItem(id)) },
-         downvoteJokeItem: (id) => { dispatch(downvoteJokeItem(id)) },
-
-     }
- };
+const mapDispatchToProps = dispatch => {
+    return {
+        getRandomJokeFromNet: () => { dispatch(fetchJokeItem()) },
+        getJokeById: (id) => { dispatch(fetchJokeItem(id)) },
+        upvoteJokeItem: (id) => { dispatch(upvoteJokeItem(id)) },
+        downvoteJokeItem: (id) => { dispatch(downvoteJokeItem(id)) },
+        addLocalJoke: () => { dispatch(addLocalJoke()) },
+    }
+};
 
 
 class JokeApp extends Component {
@@ -51,9 +52,9 @@ class JokeApp extends Component {
             id: apiState.id,
             isLoading: uiState.isLoading,
         };
-      }
+    }
 
-      static getDerivedStateFromProps(nextProps, prevState) {
+    static getDerivedStateFromProps(nextProps, prevState) {
         return {
             jokeItem: nextProps.apiState.jokeItem,
             upvotes: nextProps.apiState.upvotes,
@@ -61,7 +62,7 @@ class JokeApp extends Component {
             id: nextProps.apiState.id,
             isLoading: nextProps.uiState.isLoading,
         };
-     }
+    }
 
     getJoke = () => {
         this.props.getRandomJokeFromNet();
@@ -78,7 +79,7 @@ class JokeApp extends Component {
     }
 
     refreshCkick = () => {
-       this.props.getJokeById(this.state.id);
+        this.props.getJokeById(this.state.id);
     }
 
     componentDidMount() {
@@ -87,39 +88,42 @@ class JokeApp extends Component {
 
     render() {
         return (
-        <div>
-            <LoadingOverlay active={this.state.isLoading} spinner text='Loading your content...'>
-                <div>
-                    777cb5f7fb804fb584f61a19a5daf49f
+            <div>
+                <LoadingOverlay active={this.state.isLoading} spinner text='Loading your content...'>
+                    <div>
+                        777cb5f7fb804fb584f61a19a5daf49f
                 </div>
-                <div>
-                    <JokeContainer>
-                        { this.state.jokeItem }
-                    </JokeContainer>
-                </div>
-                <div>
-                    { this.state.id }
-                </div>
-                <div>
-                    <Wrapper>
-                        <ThumbsUp onClick={this.thumbUpClick}/>
-                    </Wrapper>
-                    { this.state.upvotes }
-                </div>
-                <div>
-                    <Wrapper>
-                        <ThumbsDown onClick={this.thumbDownClick}/>
-                    </Wrapper>
-                    { this.state.downvotes }
-                </div>
-                <button onClick={this.getJoke}>
-                    get random joke
+                    <div>
+                        <JokeContainer>
+                            {this.state.jokeItem}
+                        </JokeContainer>
+                    </div>
+                    <div>
+                        {this.state.id}
+                    </div>
+                    <div>
+                        <Wrapper>
+                            <ThumbsUp onClick={this.thumbUpClick} />
+                        </Wrapper>
+                        {this.state.upvotes}
+                    </div>
+                    <div>
+                        <Wrapper>
+                            <ThumbsDown onClick={this.thumbDownClick} />
+                        </Wrapper>
+                        {this.state.downvotes}
+                    </div>
+                    <button onClick={this.getJoke}>
+                        get random joke
                 </button>
                 <button onClick={this.refreshCkick}>
-                    refresh this joke
+                        refresh this joke
                 </button>
-            </LoadingOverlay>
-        </div>
+                <button onClick={this.props.addLocalJoke}>
+                        add local joke
+                </button>
+                </LoadingOverlay>
+            </div>
         )
     }
 }
