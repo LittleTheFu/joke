@@ -4,6 +4,8 @@ import { fetchJokeItem, upvoteJokeItem, downvoteJokeItem } from './apiActions';
 import styled from 'styled-components';
 import { ReactComponent as ThumbsUp } from './thumbs_up.svg';
 import { ReactComponent as ThumbsDown } from './thumbs_down.svg';
+import LoadingOverlay from 'react-loading-overlay';
+
 
 const JokeContainer = styled.h1`
     font-size: 1.5em;
@@ -83,35 +85,37 @@ class JokeApp extends Component {
     render() {
         return (
         <div>
-            <div>
-                777cb5f7fb804fb584f61a19a5daf49f
-            </div>
-            <div>
-                <JokeContainer>
-                    { this.state.jokeItem }
-                </JokeContainer>
-            </div>
-            <div>
-                { this.state.id }
-            </div>
-            <div>
-                <Wrapper>
-                    <ThumbsUp onClick={this.thumbUpClick}/>
-                </Wrapper>
-                { this.state.upvotes }
-            </div>
-            <div>
-                <Wrapper>
-                    <ThumbsDown onClick={this.thumbDownClick}/>
-                </Wrapper>
-                { this.state.downvotes }
-            </div>
-            <button onClick={this.getJoke}>
-                get random joke
-            </button>
-            <button onClick={this.refreshCkick}>
-                refresh this joke
-            </button>
+            <LoadingOverlay active={true} spinner text='Loading your content...'>
+                <div>
+                    777cb5f7fb804fb584f61a19a5daf49f
+                </div>
+                <div>
+                    <JokeContainer>
+                        { this.state.jokeItem }
+                    </JokeContainer>
+                </div>
+                <div>
+                    { this.state.id }
+                </div>
+                <div>
+                    <Wrapper>
+                        <ThumbsUp onClick={this.thumbUpClick}/>
+                    </Wrapper>
+                    { this.state.upvotes }
+                </div>
+                <div>
+                    <Wrapper>
+                        <ThumbsDown onClick={this.thumbDownClick}/>
+                    </Wrapper>
+                    { this.state.downvotes }
+                </div>
+                <button onClick={this.getJoke}>
+                    get random joke
+                </button>
+                <button onClick={this.refreshCkick}>
+                    refresh this joke
+                </button>
+            </LoadingOverlay>
         </div>
         )
     }
