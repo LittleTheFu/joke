@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchJokeItem, upvoteJokeItem, downvoteJokeItem } from './apiActions';
-import { addLocalJoke } from './localActions';
+import { addLocalJoke, clearLocalJoke } from './localActions';
 import styled from 'styled-components';
 import { ReactComponent as ThumbsUp } from './thumbs_up.svg';
 import { ReactComponent as ThumbsDown } from './thumbs_down.svg';
@@ -38,6 +38,7 @@ const mapDispatchToProps = dispatch => {
         upvoteJokeItem: (id) => { dispatch(upvoteJokeItem(id)) },
         downvoteJokeItem: (id) => { dispatch(downvoteJokeItem(id)) },
         addLocalJoke: (joke) => { dispatch(addLocalJoke(joke)) },
+        clearLocalJoke: () => { dispatch(clearLocalJoke()) },
     }
 };
 
@@ -130,8 +131,8 @@ class JokeApp extends Component {
                 <button onClick={this.refreshCkick}>
                         refresh this joke
                 </button>
-                <button onClick={this.addLocalJokeClick}>
-                        add local joke
+                <button onClick={this.props.clearLocalJoke}>
+                        clear local joke
                 </button>
                 </LoadingOverlay>
 

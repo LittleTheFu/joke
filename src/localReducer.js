@@ -12,6 +12,11 @@ const initialState = {
                 ...state,
                 recentJokes: [...state.recentJokes, action.joke],
             };
+        case 'CLEAR_LOCAL_JOKE':
+            return {
+                ...state,
+                recentJokes: [],
+            };
         default:
             return state;
         }
