@@ -15,15 +15,24 @@ const createFetchData = (id='') => {
 
 export const fetchJokeItem = (id='') => {
     return dispatch => {
+        dispatch({
+            type: 'BEGIN_LOADING',
+        });
         rawFetchJokeItem(createFetchData(id))
         .then((data) => {
             dispatch({
                 type: 'FETCH_JOKE_SUCCESS',
                 data,
              });
+             dispatch({
+                 type: 'END_LOADING',
+             });
         })
         .catch((err) => {
             console.log(err);
+            dispatch({
+                type: 'END_LOADING',
+            });
         });
     };
 };
@@ -46,15 +55,24 @@ const createUpvoteData = (id) => {
 
 export const upvoteJokeItem = (id) => {
     return dispatch => {
+        dispatch({
+            type: 'BEGIN_LOADING',
+        });
         rawFetchJokeItem(createUpvoteData(id))
         .then((data) => {
             dispatch({
                 type: 'FETCH_JOKE_SUCCESS',
                 data,
              });
+             dispatch({
+                type: 'END_LOADING',
+            });
         })
         .catch((err) => {
             console.log(err);
+            dispatch({
+                type: 'END_LOADING',
+            });
         });
     };
 };
@@ -77,15 +95,24 @@ const createDownvoteData = (id) => {
 
 export const downvoteJokeItem = (id) => {
     return dispatch => {
+        dispatch({
+            type: 'BEGIN_LOADING',
+        });
         rawFetchJokeItem(createDownvoteData(id))
         .then((data) => {
             dispatch({
                 type: 'FETCH_JOKE_SUCCESS',
                 data,
              });
+             dispatch({
+                type: 'END_LOADING',
+            });
         })
         .catch((err) => {
             console.log(err);
+            dispatch({
+                type: 'END_LOADING',
+            });
         });
     };
 };

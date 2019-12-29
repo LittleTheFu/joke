@@ -24,6 +24,7 @@ const Wrapper = styled.div`
 const mapStateToProps = state => {
     return {
         apiState: state.apiState.data,
+        uiState: state.uiState,
     };
  };
 
@@ -41,13 +42,14 @@ const mapStateToProps = state => {
 class JokeApp extends Component {
     constructor(props) {
         super(props);
-        const { apiState } = props;
+        const { apiState, uiState } = props;
 
         this.state = {
             jokeItem: apiState.jokeItem,
             upvotes: apiState.upvotes,
             downvotes: apiState.downvotes,
             id: apiState.id,
+            isLoading: uiState.isLoading,
         };
       }
 
@@ -57,6 +59,7 @@ class JokeApp extends Component {
             upvotes: nextProps.apiState.upvotes,
             downvotes: nextProps.apiState.downvotes,
             id: nextProps.apiState.id,
+            isLoading: nextProps.uiState.isLoading,
         };
      }
 
@@ -85,7 +88,7 @@ class JokeApp extends Component {
     render() {
         return (
         <div>
-            <LoadingOverlay active={true} spinner text='Loading your content...'>
+            <LoadingOverlay active={this.state.isLoading} spinner text='Loading your content...'>
                 <div>
                     777cb5f7fb804fb584f61a19a5daf49f
                 </div>
