@@ -26,22 +26,37 @@ const mapDispatchToProps = dispatch => {
 };
 
 class JokeList extends Component {
+    constructor(props) {
+        super(props);
+        this.scrollbar = React.createRef();
+    };
+
     handleClick = (id) => {
         return () => {
             this.props.getJokeById(id);
         };
     };
 
+    scrollToBottom = () => {
+        this.scrollbar.current.scrollIntoView({ block: "end", behavior: "smooth" });
+      }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+      }
+
     render() {
         return (
             <div>
-                <Container isVisible={this.props.isVisible}>
+                <Container isVisible={this.props.isVisible} >
+                    <div ref={this.scrollbar}>
                     {this.props.items.map((item, index) =>
                         (<ItemButton 
                             key={index}
                             data={item.jokeItem}
                             click={this.handleClick(item.id)}>
                         </ItemButton>))}
+                    </div>
                 </Container>
             </div>
         )
