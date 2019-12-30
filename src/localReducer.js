@@ -5,12 +5,18 @@ const initialState = {
     ],
  };
 
+ const MAX_LOCAL_NUM = 7;
+
  const localReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_LOCAL_JOKE':
+            let jokes = state.recentJokes;
+            if ( jokes.length >= MAX_LOCAL_NUM ) {
+                jokes.shift();
+            }
             return {
                 ...state,
-                recentJokes: [...state.recentJokes, action.joke],
+                recentJokes: [...jokes, action.joke],
             };
         case 'CLEAR_LOCAL_JOKE':
             return {
