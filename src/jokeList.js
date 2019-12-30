@@ -8,8 +8,8 @@ class JokeList extends Component {
     render() {
         return (
             <div>
-                {this.props.items.map((item) => 
-                    (<h1>{item.id} ## {item.jokeItem}</h1>)
+                {this.props.items.map((item, index) => 
+                    (<h1 key={index}>{item.id} ## {item.jokeItem}</h1>)
                 )}
             </div>
         )
