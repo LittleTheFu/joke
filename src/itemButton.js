@@ -12,14 +12,9 @@ const Container = styled.div`
 `;
 
 class ItemButton extends Component {
-
-    hanleClick = () => {
-        console.log('click buttonItem');
-    };
-
     render() {
         return (
-            <Container onClick={this.hanleClick}>
+            <Container onClick={this.props.click}>
                 {this.props.data}
             </Container>
         )
