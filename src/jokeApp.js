@@ -49,25 +49,15 @@ const mapDispatchToProps = dispatch => {
 class JokeApp extends Component {
     constructor(props) {
         super(props);
-        const { apiState, uiState } = props;
+        const { uiState } = props;
 
         this.state = {
-            jokeItem: apiState.jokeItem,
-            upvotes: apiState.upvotes,
-            downvotes: apiState.downvotes,
-            id: apiState.id,
-            isLoading: uiState.isLoading,
             toggleHistoryText: uiState.isHistoryVisible ? 'Hide' : 'Show'
         };
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         return {
-            jokeItem: nextProps.apiState.jokeItem,
-            upvotes: nextProps.apiState.upvotes,
-            downvotes: nextProps.apiState.downvotes,
-            id: nextProps.apiState.id,
-            isLoading: nextProps.uiState.isLoading,
             toggleHistoryText: nextProps.uiState.isHistoryVisible ? 'Hide' : 'Show',
         };
     }
@@ -77,24 +67,23 @@ class JokeApp extends Component {
     }
 
     thumbUpClick = () => {
-        this.props.upvoteJokeItem(this.state.id);
+        this.props.upvoteJokeItem(this.props.apiState.id);
         console.log('vote up');
     }
 
     thumbDownClick = () => {
-        this.props.downvoteJokeItem(this.state.id);
+        this.props.downvoteJokeItem(this.props.apiState.id);
         console.log('vote down');
     }
 
     refreshCkick = () => {
-        this.props.getJokeById(this.state.id);
+        this.props.getJokeById(this.props.apiState.id);
     }
 
     addLocalJokeClick = () => {
-        // console.log(this.states.id);
         let joke = {
-            id: this.state.id,
-            jokeItem: this.state.jokeItem,
+            id: this.props.apiState.id,
+            jokeItem: this.props.apiState.jokeItem,
         };
         this.props.addLocalJoke(joke);
     }
@@ -114,29 +103,26 @@ class JokeApp extends Component {
     render() {
         return (
             <div>
-                <LoadingOverlay active={this.state.isLoading} spinner text='Loading your content...'>
-                    <div>
-                        777cb5f7fb804fb584f61a19a5daf49f
-                </div>
+                <LoadingOverlay active={this.props.uiState.isLoading} spinner text='Loading your content...'>
                     <div>
                         <JokeContainer>
-                            {this.state.jokeItem}
+                            {this.props.apiState.jokeItem}
                         </JokeContainer>
                     </div>
                     <div>
-                        {this.state.id}
+                        {this.props.apiState.id}
                     </div>
                     <div>
                         <Wrapper>
                             <ThumbsUp onClick={this.thumbUpClick} />
                         </Wrapper>
-                        {this.state.upvotes}
+                        {this.props.apiState.upvotes}
                     </div>
                     <div>
                         <Wrapper>
                             <ThumbsDown onClick={this.thumbDownClick} />
                         </Wrapper>
-                        {this.state.downvotes}
+                        {this.props.apiState.downvotes}
                     </div>
                     <button onClick={this.getJoke}>
                         get random joke
