@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    border-top: 1px solid blue;
+    border-top: 1px;
+    border-bottom: 1px;
     text-align:center;
     font-size:36px;
+    margin: 8px;
 
     &:hover {
        background: rgba(213,233,227,1);
