@@ -16,12 +16,37 @@ const JokeContainer = styled.h1`
     color: red;
 `;
 
+const IdContainer = styled.h1`
+    font-size: 1.0em;
+    text-align: center;
+    color: blue;
+`;
+
 const Wrapper = styled.div`
     & path {
         &:hover {
             fill: blue;
         }
     }
+`;
+
+const ThumbGroup = styled.div`
+    display: flex; 
+    justify-content: center;
+`;
+
+const ThumbsContainer = styled.div`
+    margin: 12px 40px 12px 40px;
+`;
+
+const ButtonGroup = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
+const Button = styled.button`
+    width: 250px;
+    height: 30px;
 `;
 
 const mapStateToProps = state => {
@@ -109,33 +134,37 @@ class JokeApp extends Component {
                             {this.props.apiState.jokeItem}
                         </JokeContainer>
                     </div>
-                    <div>
-                        {this.props.apiState.id}
-                    </div>
-                    <div>
+                    <IdContainer>
+                        id: {this.props.apiState.id}
+                    </IdContainer>
+                    <ThumbGroup>
+                        <ThumbsContainer>
                         <Wrapper>
                             <ThumbsUp onClick={this.thumbUpClick} />
                         </Wrapper>
                         {this.props.apiState.upvotes}
-                    </div>
-                    <div>
+                        </ThumbsContainer>
+                        <ThumbsContainer>
                         <Wrapper>
                             <ThumbsDown onClick={this.thumbDownClick} />
                         </Wrapper>
                         {this.props.apiState.downvotes}
-                    </div>
-                    <button onClick={this.getJoke}>
-                        get random joke
-                </button>
-                    <button onClick={this.refreshCkick}>
-                        refresh this joke
-                </button>
-                    <button onClick={this.props.clearLocalJoke}>
-                        clear local joke
-                </button>
-                    <button onClick={this.toggleListClick}>
-                        {this.state.toggleHistoryText}
-                </button>
+                        </ThumbsContainer>
+                    </ThumbGroup>
+                    <ButtonGroup>
+                        <Button onClick={this.getJoke}>
+                            get random joke
+                        </Button>
+                        <Button onClick={this.refreshCkick}>
+                            refresh this joke
+                        </Button>
+                        <Button onClick={this.props.clearLocalJoke}>
+                            clear local joke
+                        </Button>
+                        <Button onClick={this.toggleListClick}>
+                            {this.state.toggleHistoryText}
+                        </Button>
+                    </ButtonGroup>
                 </LoadingOverlay>
 
                 <JokeList items={this.props.localState.recentJokes} />
