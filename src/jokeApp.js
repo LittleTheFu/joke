@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchJokeItem, upvoteJokeItem, downvoteJokeItem } from './apiActions';
 import { addLocalJoke, clearLocalJoke } from './localActions';
+import { showHistory, hideHistory } from './uiActions';
 import styled from 'styled-components';
 import { ReactComponent as ThumbsUp } from './thumbs_up.svg';
 import { ReactComponent as ThumbsDown } from './thumbs_down.svg';
@@ -39,6 +40,8 @@ const mapDispatchToProps = dispatch => {
         downvoteJokeItem: (id) => { dispatch(downvoteJokeItem(id)) },
         addLocalJoke: (joke) => { dispatch(addLocalJoke(joke)) },
         clearLocalJoke: () => { dispatch(clearLocalJoke()) },
+        showHistory: () => { dispatch(showHistory()) },
+        hideHistory: () => { dispatch(hideHistory()) },
     }
 };
 
@@ -54,6 +57,7 @@ class JokeApp extends Component {
             downvotes: apiState.downvotes,
             id: apiState.id,
             isLoading: uiState.isLoading,
+            toggleHistoryText: uiState.isHistoryVisible ? 'Hide' : 'Show'
         };
     }
 
@@ -64,6 +68,7 @@ class JokeApp extends Component {
             downvotes: nextProps.apiState.downvotes,
             id: nextProps.apiState.id,
             isLoading: nextProps.uiState.isLoading,
+            toggleHistoryText: nextProps.uiState.isHistoryVisible ? 'Hide' : 'Show',
         };
     }
 
@@ -87,11 +92,19 @@ class JokeApp extends Component {
 
     addLocalJokeClick = () => {
         // console.log(this.states.id);
-        let joke = { 
+        let joke = {
             id: this.state.id,
             jokeItem: this.state.jokeItem,
-         };
+        };
         this.props.addLocalJoke(joke);
+    }
+
+    toggleListClick = () => {
+        if (this.props.uiState.isHistoryVisible) {
+            this.props.hideHistory();
+        } else {
+            this.props.showHistory();
+        }
     }
 
     componentDidMount() {
@@ -128,15 +141,18 @@ class JokeApp extends Component {
                     <button onClick={this.getJoke}>
                         get random joke
                 </button>
-                <button onClick={this.refreshCkick}>
+                    <button onClick={this.refreshCkick}>
                         refresh this joke
                 </button>
-                <button onClick={this.props.clearLocalJoke}>
+                    <button onClick={this.props.clearLocalJoke}>
                         clear local joke
+                </button>
+                    <button onClick={this.toggleListClick}>
+                        {this.state.toggleHistoryText}
                 </button>
                 </LoadingOverlay>
 
-                <JokeList items={this.props.localState.recentJokes}/>
+                <JokeList items={this.props.localState.recentJokes} />
             </div>
         )
     }

@@ -5,12 +5,19 @@ import { fetchJokeItem } from './apiActions';
 import { connect } from 'react-redux';
 
 const Container = styled.div`
-   margin-top: 80px;
-   height:300px;
-   background: gray;
-   overflow: scroll;
-   margin: 10px 40px 0 40px;
+    margin-top: 80px;
+    height:300px;
+    background: gray;
+    overflow: scroll;
+    margin: 10px 40px 0 40px;
+    display: ${props => props.isVisible ? 'block' : 'none'};
 `;
+
+const mapStateToProps = state => {
+    return {
+        isVisible: state.uiState.isHistoryVisible,
+    };
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -28,7 +35,7 @@ class JokeList extends Component {
     render() {
         return (
             <div>
-                <Container>
+                <Container isVisible={this.props.isVisible}>
                     {this.props.items.map((item, index) =>
                         (<ItemButton 
                             key={index}
@@ -41,4 +48,4 @@ class JokeList extends Component {
     }
 };
 
-export default connect(null, mapDispatchToProps)(JokeList);
+export default connect(mapStateToProps, mapDispatchToProps)(JokeList);
