@@ -10,6 +10,9 @@ const initialState = {
  const localReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_LOCAL_JOKE':
+            if(action.joke.id == state.recentJokes[state.recentJokes.length - 1].id) {
+                return state;
+            }
             let jokes = state.recentJokes;
             if ( jokes.length >= MAX_LOCAL_NUM ) {
                 jokes.shift();
