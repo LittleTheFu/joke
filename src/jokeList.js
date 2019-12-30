@@ -11,6 +11,7 @@ const Container = styled.div`
 
 const ItemContainer = styled.div`
    border-top: 1px solid blue;
+   text-align:center;
 `;
 
 class JokeList extends Component {
