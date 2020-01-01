@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import ItemButton from './itemButton'
-import { fetchJokeItem } from './apiActions';
+import { fetchJokeItem } from '../reducers/apiActions';
 import { connect } from 'react-redux';
 
 const Container = styled.div`

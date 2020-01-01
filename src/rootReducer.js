@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import apiReducer from './apiReducer';
-import uiReducer from './uiReducer';
-import localReducer from './localReducer';
+import apiReducer from './reducers/apiReducer';
+import uiReducer from './reducers/uiReducer';
+import localReducer from './reducers/localReducer';
 import thunkMiddleware from 'redux-thunk';
 
 

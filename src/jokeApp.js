@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchJokeItem, upvoteJokeItem, downvoteJokeItem } from './apiActions';
-import { addLocalJoke, clearLocalJoke } from './localActions';
-import { showHistory, hideHistory } from './uiActions';
+import { fetchJokeItem, upvoteJokeItem, downvoteJokeItem } from './reducers/apiActions';
+import { addLocalJoke, clearLocalJoke } from './reducers/localActions';
+import { showHistory, hideHistory } from './reducers/uiActions';
 import styled from 'styled-components';
 import { ReactComponent as ThumbsUp } from './thumbs_up.svg';
 import { ReactComponent as ThumbsDown } from './thumbs_down.svg';
 import LoadingOverlay from 'react-loading-overlay';
-import JokeList from './jokeList';
+import JokeList from './compnents/jokeList';
 
 
 const JokeContainer = styled.h1`
