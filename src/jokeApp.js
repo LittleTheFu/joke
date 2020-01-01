@@ -168,6 +168,7 @@ class JokeApp extends Component {
                 </LoadingOverlay>
 
                 <JokeList items={this.props.localState.recentJokes} />
+                <img src="/images/joke.png" />
             </div>
         )
     }
